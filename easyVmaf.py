@@ -62,6 +62,7 @@ def get_args():
     parser.add_argument('-phone', help='It enables vmaf phone model (HD only). (Default=disable).', action='store_true')
     parser.add_argument('-verbose', help='Activate verbose loglevel. (Default: info).', action='store_true')
     parser.add_argument('-output_fmt', dest='output_fmt',type=str, default='json', help='Output vmaf file format. Options: json or xml (Default: json)')
+    parser.add_argument('-output_file_path', dest='output_file_path', type=str, default=None, help='Output path. Use when default path can not be written (Default: same path as of distorted video)')
     
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
@@ -93,6 +94,7 @@ if __name__ == '__main__':
     phone = cmdParser.phone
     verbose = cmdParser.verbose
     output_fmt = cmdParser.output_fmt
+    output_file_path = cmdParser.output_file_path
 
     # Setting verbosity
     if verbose:
@@ -122,6 +124,11 @@ if __name__ == '__main__':
               main_pattern, flush=True)
         sys.exit(1)
 
+    if (output_file_path) & (not(os.path.isdir(output_file_path))):
+        print("Output path is not a directory: ",
+              output_file_path, flush=True)
+        sys.exit(1)
+
     for main in mainFiles:
         myVmaf = vmaf(main, reference, loglevel=loglevel, subsample=n_subsample, model=model, phone= phone, output_fmt=output_fmt)
         '''check if syncWin was set. If true offset is computed automatically, otherwise manual values are used  '''
@@ -136,7 +143,7 @@ if __name__ == '__main__':
             else:
                 myVmaf.offset = offset
 
-        myVmaf.getVmaf()
+        myVmaf.getVmaf(logpath=output_file_path)
         vmafpath = myVmaf.ffmpegQos.vmafpath
         vmafScore = []
 

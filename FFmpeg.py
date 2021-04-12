@@ -86,7 +86,7 @@ class FFmpegQos:
     '''
     cmd = config.ffmpeg
 
-    def __init__ (self,  main, ref , loglevel = "info"):
+    def __init__ (self,  main, ref, vmafpath, loglevel = "info"):
         self.loglevel = loglevel
         self.cmd = None
         self.main = inputFFmpeg(main, input_id =0)
@@ -94,7 +94,7 @@ class FFmpegQos:
         self.psnrFilter = []
         self.vmafFilter = []
         self.invertedSrc = False
-        self.vmafpath = None
+        self.vmafpath = vmafpath
 
     def _commit(self):
         """build the final cmd to run"""

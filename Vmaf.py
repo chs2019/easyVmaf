@@ -128,6 +128,7 @@ class vmaf():
         self.offset = 0
         self._initResolutions()
         self.output_fmt = output_fmt 
+        
 
 
     def _initResolutions(self):
@@ -342,9 +343,9 @@ class vmaf():
             self.ffmpegQos.main.setTrimFilter(offset, duration )
             self.ffmpegQos.ref.setTrimFilter(0, duration)
 
+
+        
     def getVmaf(self, autoSync = False):
-
-
         """ clean all filters first """
         self.ffmpegQos.clearFilters()
         self.ffmpegQos.main.clearFilters()
