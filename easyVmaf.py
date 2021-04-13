@@ -143,7 +143,7 @@ if __name__ == '__main__':
             else:
                 myVmaf.offset = offset
 
-        myVmaf.getVmaf(log_path=output_file_path)
+        myVmaf.getVmaf(output_file_path=output_file_path)
         vmafpath = myVmaf.ffmpegQos.vmafpath
         vmafScore = []
 
