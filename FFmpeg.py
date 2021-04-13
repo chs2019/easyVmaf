@@ -149,7 +149,7 @@ class FFmpegQos:
             log_fmt = "json"
             if log_path == None:
                 log_path = os.path.splitext(self.main.videoSrc)[0]+ '_vmaf.json'
-        self.vmafpath = log_path
+        self.vmafpath = log_path    
         if model =='HD': 
             model_path = config.vmaf_HD
             phone_model = int (phone)

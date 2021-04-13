@@ -124,7 +124,7 @@ if __name__ == '__main__':
               main_pattern, flush=True)
         sys.exit(1)
 
-    if (output_file_path) & (not(os.path.isdir(output_file_path))):
+    if output_file_path and not(os.path.isdir(output_file_path)):
         print("Output path is not a directory: ",
               output_file_path, flush=True)
         sys.exit(1)
@@ -143,7 +143,7 @@ if __name__ == '__main__':
             else:
                 myVmaf.offset = offset
 
-        myVmaf.getVmaf(logpath=output_file_path)
+        myVmaf.getVmaf(log_path=output_file_path)
         vmafpath = myVmaf.ffmpegQos.vmafpath
         vmafScore = []
 

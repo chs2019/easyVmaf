@@ -345,7 +345,10 @@ class vmaf():
 
 
         
-    def getVmaf(self, autoSync = False):
+    def getVmaf(self, output_file_path = None, autoSync = False):
+        """ enable controlling the output file path, needed when distorted video path is not writable """
+        self.output_file_path = output_file_path
+
         """ clean all filters first """
         self.ffmpegQos.clearFilters()
         self.ffmpegQos.main.clearFilters()
@@ -373,9 +376,11 @@ class vmaf():
         print("loglevel:", self.loglevel, flush=True)
         print("subsample:", self.subsample, flush=True)
         print("output_fmt:", self.output_fmt, flush=True)
+        if (self.output_file_path):
+            print("output_file_path:", self.output_file_path, flush=True)
         print("=======================================", flush=True)
 
-        self.ffmpegQos.getVmaf(model = self.model, phone = self.phone, subsample= self.subsample, output_fmt=self.output_fmt)
+        self.ffmpegQos.getVmaf(model = self.model, phone = self.phone, subsample= self.subsample, output_fmt=self.output_fmt, log_path=self.output_file_path)
 
 
 def getFrameRate(r_frame_rate):
